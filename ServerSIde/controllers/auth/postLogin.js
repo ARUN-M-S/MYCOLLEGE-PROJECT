@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const postLogin = async (req, res) => {
- 
+ console.log(req.body,"data is here in login");
     const { mail, password } = req.body;
     const user = await User.findOne({ mail: mail.toLowerCase() });
 
@@ -19,7 +19,7 @@ const postLogin = async (req, res) => {
           expiresIn: "24h",
         }
       );
-      return res.status(200).json({
+      return res.status(200).send({
         userDetails: {
           mail: user.mail,
           username: user.firstname,

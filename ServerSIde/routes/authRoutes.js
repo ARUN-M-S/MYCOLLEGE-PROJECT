@@ -16,7 +16,14 @@ const loginSchema = Joi.object({
   mail: Joi.string().email().required(),
   password: Joi.string().min(6).max(20).required(),
 });
+// ===========================Router login============
+// router.get("/login",async (req, res, next) => {
+//   if (req.localStorage.userDetails) {
+//  redirect("/")
+//   } 
 
+// }
+// )
 //=====================================Register=====================================
 router.post("/register",
 
@@ -31,9 +38,10 @@ router.post(
   authControllers.controllers.postLogin
 );
 // =================Test route for verify middleware===================
-router.get("/test",auth,(req,res)=>{
-  res.send("Route is working fine")
+router.get("/test",(req,res)=>{
+  res.send({message:"Route is working fine"})
 
 })
+
 
 module.exports = router;
