@@ -52,4 +52,5 @@ const AdminCredentials={
            next(err) 
         }
     }
+    
     module.exports={getUsers,postLogin,deleteUser}
