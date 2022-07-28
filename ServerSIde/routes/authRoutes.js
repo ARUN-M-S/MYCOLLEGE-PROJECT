@@ -79,6 +79,7 @@ router.get("/get/channelList", (req, res) => {
 router.post("/new/message?", (req, res) => {
   // console.log(req.query.id);
   // const newMessage=req.body
+  
   console.log(req.body,"messages is here");
   chatData.findByIdAndUpdate(
     { _id: req.query.id },

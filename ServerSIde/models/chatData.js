@@ -5,11 +5,12 @@ const groupChatSchema=mongoose.Schema({
         {
             message:String,
             timestamp:String,
-            user:{
-                displayName:String,
-                email:String,
+            user:String,
+            // user:{
+            //     displayName:String,
+            //     email:String,
 
-            }
+            // }
         }
     ]
 })
