@@ -6,13 +6,16 @@ const { string } = require("joi");
 const validator = require("express-joi-validation").createValidator({});
 const auth = require("../middleware/auth");
 const chatData = require("../models/chatData");
+const User= require("../models/user")
 const { application } = require("express");
+const upload = require("../middleware/multer")
 
 const registerSchema = Joi.object({
   firstname: Joi.string().min(3).max(12).required(),
   lastname: Joi.string().min(3).max(12).required(),
   mail: Joi.string().email().required(),
   password: Joi.string().min(6).max(20).required(),
+  
 });
 const loginSchema = Joi.object({
   mail: Joi.string().email().required(),
@@ -119,5 +122,37 @@ router.get("/get/conversation",(req,res)=>{
     }
   })
 })
+router.post("/addmydetails",auth,async(req,res)=>{
+  
+  console.log(req.query.mail,"qurry");
+  console.log(req.body,"data is herekjhfbkl");
+
+
+
+   const user=await User.findOneAndUpdate({mail:req.query.mail},{studentDetails:req.body},{new:true});
+  
+   res.status(200).send({
+     user,
+    message:"Details added Successfull"
+ 
+});
+  
+
+})
+
+router.get("/yourProfile/:id",async(req,res)=>{
+  const student=await User.find({mail:req.params.id})
+  res.status(200).json(student)
+
+});
+
+router.get("/dashboard/:id",async(req,res)=>{
+  console.log(req.params.id,"jhgsdf");
+  const student=await User.find({mail:req.params.id})
+  console.log(student);
+  res.status(200).json(student)
+})
+
+
 
 module.exports = router;

@@ -3,7 +3,8 @@ const config = process.env;
 
 
 const verifyToken =(req,res,next)=>{
-    let token = req.body.token || req.query.token || req.headers['authorization'];
+    console.log('hhhh');
+    let token = req.headers.authorization;
     if(!token){
         res.status(403).send("A token is required for authentication")
     }
@@ -15,6 +16,7 @@ const verifyToken =(req,res,next)=>{
     } catch (error) {
         res.status(401).send("Invalid Token")
     }
+    console.log("calling next");
     return next()
 }
 
