@@ -52,5 +52,17 @@ const AdminCredentials={
            next(err) 
         }
     }
-    
-    module.exports={getUsers,postLogin,deleteUser}
+    const viewUser = async(req,res,next)=>{
+      console.log("call is in th ebackend get Single user");
+      const ids=await req.params.id
+
+      try {
+        let userss=await user.findOne({_id:ids});
+        console.log(userss,"admin userssssssss");
+            res.status(200).json(userss)
+        } catch (error) {
+           next(error) 
+        }
+
+    }
+    module.exports={getUsers,postLogin,deleteUser,viewUser}
